@@ -1,0 +1,68 @@
+#create-community-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.create-community-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+#create-community-header {
+    margin: 0 0 100px 0 !important;
+    font-size: 50px;
+    text-align: center;
+}
+
+#create-community-name,
+#create-community-description,
+#create-community-creator-username,
+#create-community-engender-community {
+    width: 100%;
+    max-width: 800px;
+    padding: 15px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+#create-community-name {
+    width: 50%;
+}
+
+#create-community-description {
+    width: 100%;
+}
+
+#create-community-creator-username {
+    width: 50%;
+}
+
+#create-community-engender-community {
+    width: auto;
+    border: 1px solid #000;
+    transition: background-color 0.3s ease;
+    padding: 10px 20px;
+}
+
+#create-community-engender-community:hover {
+    cursor: pointer;
+    background-color: darkgray;
+}
+
+.create-community-errors {
+    color: red;
+    margin: -20px 0 50px 0;
+    width: 100%;
+    max-width: 800px;
+    font-size: 14px;
+    text-align: center; /* Ensures the text is centered */
+    display: block; /* Ensure errors are block elements */
+}

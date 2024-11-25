@@ -1,0 +1,206 @@
+#mainContentView{
+    /*Postiiton fixed in order to not create a window scrollbar*/
+    position: fixed;
+    padding: 58px 10px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    word-wrap: break-word;
+
+    margin: 0;
+
+    font-family: "verdana, arial, helvetica, sans-serif";
+}
+
+#home-header-container, #community-header-container, #search-results-header-container{
+    border-bottom: 1px solid lightgray;
+}
+#community-loading{
+    margin-top: 12px;
+}
+#post-page-header-container{
+    border-bottom: 1px solid lightgray;
+}
+
+#home-header-title-and-button-container, #community-header-title-and-button-container,
+#search-results-header-title-and-button-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#home-header-title-and-button-container> h1, #community-header-title-and-button-container> h1,
+#search-results-header-title-and-button-container > h1{
+    font-size: 40px;
+    flex: 1;
+    padding-left: 50px;
+}
+
+@media screen and (min-width: 1200px) {
+    #mainContentView{
+        width: calc(100% - 306px);
+    }
+}
+
+/*Post titles*/
+.link-flair {
+    margin: 0;
+    display: inline-block;
+    width: auto;
+    border: 1px solid black;
+    border-radius: 1em;
+    text-align: center;
+    background-color: #e4e4e4;
+}
+.link-flair > p {
+    padding: 8px 10px 8px 10px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.post-title > a > h1 {
+    font-size: 30px;
+    margin: 8px 0;
+}
+/*End of Post titles*/
+
+#link_flair_container{
+    display: inline-block;
+    background-color: #e4e4e4;
+    padding: 8px 10px 8px 10px;
+    width: auto;
+    border: 1px solid black;
+    border-radius: 1em;
+    text-align: center;
+}
+
+#button-container{
+    flex: 1;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 50px;
+    margin: 30px;
+}
+#button-container> button{
+    font-family: "Roboto Serif";
+    padding: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+}
+#button-container > button:hover{
+    background-color: rgb(219, 219, 219);
+    cursor: pointer;
+}
+
+.shift-home-left {
+    margin-left: 306px !important;
+    width: calc(100% - 306px) !important;
+}
+
+
+/* css for posts*/
+.post-header{
+    font-weight: 700;
+    font-style: italic;  
+}
+.chars20{
+    color: black;
+}
+.view-and-comment-count{
+    color: black;
+}
+.dotted-line{
+    border-bottom: 1px dotted black;
+}
+
+/* css for comments*/
+.indent-comment-block {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-left: 1px solid black;
+}
+
+/* css for create post */
+#create-post-form{
+    margin-top: 0px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 756px;
+}
+
+#select-community{
+    flex: 1;
+    width: 202px;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 1.5em;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#create-post-title {
+    flex: 1;
+    margin: 8px;
+    padding: 9px;
+    font-size: 16px;
+    border-radius: 1em;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#create-post-link-flair-select{
+    flex: 1;
+    width: 202px;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 1.5em;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#create-post-link-flair-input{
+    flex: 1;
+    width: 202px;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 1.5em;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#create-post-content{
+    resize: vertical;
+    padding: 8px 12px 8px 12px;
+    margin: 8px;
+    line-height: 1.5; 
+    border-radius: 1.5em;
+    border: 1px solid black;
+    box-sizing: border-box;
+    height: 154px;
+}
+
+#create-post-username {
+    flex: 1;
+    width: 320px;
+    margin: 8px;
+    padding: 9px;
+    border-radius: 1em;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#submit-post {
+    margin: 8px;
+    width: 68px;
+    height: 28px;
+}
+
+.comment-img {
+    width: 20px;
+}
+
+.view-img {
+    width: 20px;
+}

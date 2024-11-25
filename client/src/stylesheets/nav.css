@@ -1,0 +1,164 @@
+nav {
+    /*Postiiton fixed in order to not create a window scrollbar*/
+    position: fixed;
+    top: 58px;
+    bottom: 0px;
+    padding: 10px;
+    height: auto;
+    width: 280px;
+
+    /*to be removed, added for developer purposes*/
+    border-right: 1px solid lightgray;
+
+    overflow-y: auto;
+
+    margin: 0;
+}
+
+nav > div {
+    border-bottom: 1px solid lightgray;
+}
+#resources {
+    border: none;
+}
+
+#nav-pages > div, #custom-feeds > div, #custom-feeds > li, #recent > div, #COMMUNITIES > div, 
+#resources > div, #resources > section > div{
+    margin: 10px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 20px;
+    
+    text-decoration: none;
+    color: black;
+    border-radius: 20px;
+}
+
+.side-navbar >div, 
+#custom-feeds > div:hover, #recent > div, #COMMUNITIES{
+    cursor: pointer;
+}
+
+#COMMUNITIES #community-list{ /*to overwrite the css above */
+    display: grid;
+    grid-template-columns: 1fr; 
+    align-items: center;
+    column-gap: 20px; 
+    
+    text-decoration: none;
+    color: black;
+}
+#community-list > div:hover{
+    background-color: rgb(255, 68, 51); 
+}
+#community-list > div{
+    border-radius: 20px;
+    margin: 10px 0 10px 0;
+    padding-left: 15px;
+}
+
+#nav-pages > .home-page-highlighted {
+    background-color: rgb(255, 68, 51);
+}
+#nav-pages > .home-page {
+    background-color: lightgray;
+}
+
+#nav-pages :hover{
+    background-color: rgb(255, 68, 51);
+}
+
+.nav-pages-img, .resources-img, .plus-sign-img{
+    width: 30px;
+    padding-left: 15px;
+}
+#custom-feeds-title, #recent-title, #communities-title, #resources-title{
+    padding: 0 0 0 5px;
+}
+
+.carret-img{
+    width: 15px;
+    justify-self: end;
+    margin-right: 20px;
+}
+
+/* Create community button: grey background color*/
+#create-community-button{
+    background-color: rgb(211, 210, 210);
+    border-radius: 20px;
+}
+
+#create-community-button-highlighted{
+    background-color: rgb(255, 68, 51);
+    border-radius: 20px;
+}
+.community-page-highlighted{
+    background-color: rgb(255, 68, 51);
+}
+
+#resources > .show{
+    border-bottom: 1px solid black;
+}
+
+.highlight {
+    background-color: lightgray;
+}
+
+#nav-pages > a:hover, #custom-feeds > div:hover, #custom-feeds > li:hover,
+#recent > div:hover, #COMMUNITIES > div:hover, #resources > div:hover,  #resources > section > div:hover{
+    background-color: rgb(255, 68, 51);
+}
+
+#COMMUNITIES #community-list:hover{
+    background-color: white;
+}
+
+
+/* Default setting set to toggle */
+.can-toggle > img, .can-toggle > p, .can-toggle > a, .can-toggle > div{
+    display: none;  /* Uncomment this when you are implementing toggle in navbar*/
+    border: none;
+}
+.show > img, .show > p, .show > a, .show > div{
+    display: block;
+
+}
+
+
+/*1200 px when the nav should appear/disappear */
+@media screen and (min-width: 1200px) {
+    #dropdown-button{
+        display: none;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .side-navbar{
+        display: none;
+    }
+
+    #dropdown-button{
+        display: inline-block;
+        width: auto;
+        height: auto;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: none;
+        cursor: pointer;
+    }
+
+    #dropdown-icon{
+        width: 38px;
+    }
+}
+
+/* Toggle and untoggle */
+.carret-img{
+    transform: rotate(-180deg);
+    transition: transform .5s ease;
+}
+
+.carret-img.rotate180{
+    transform: rotate(0deg);
+}
