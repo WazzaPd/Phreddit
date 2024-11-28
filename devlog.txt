@@ -25,3 +25,17 @@ What was accomplished, what's next?
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+
+Toni Liang -- 11/27/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement welcome page 
+
+End of Session:
+- finished implementing welcome page
+
+
+Next session:
+- create the login page
+- create the register user page
+- use authorization, authentication, and JWT 
