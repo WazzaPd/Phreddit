@@ -1,0 +1,83 @@
+/* Style for the entire welcome page */
+.welcome-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #FF4500, #FF6347); /* Reddish-orange gradient */
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Header style with animation */
+.welcome-header {
+    font-size: 36px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 30px;
+    text-align: center;
+    animation: slideDown 1.2s ease-in-out;
+}
+
+/* Style for the card container */
+.options-container {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    animation: fadeIn .8s ease-in-out;
+}
+
+/* Button styles */
+.options-container button {
+    background-color: #FF4500;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.options-container button:hover {
+    cursor: pointer;
+    background-color: #FF6347;
+}
+
+.options-container button:active {
+    transform: scale(0.95);
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
