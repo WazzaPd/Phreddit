@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Banner from './banner.js';
 import Navbar from './navbar.js';
 import MainContent from './mainContent.js'
+import WelcomePage from './welcomePage.js';
 
 export default function Phreddit() {
   const [toggle, setToggle] = useState(true);
@@ -52,31 +53,44 @@ export default function Phreddit() {
     }
   }
 
-  return (
-    <div className="phreddit" style={{ width: '100%', height: '100%' }}>
-      <Banner 
-        onPageChange={handlePageChange} 
-        toggleNavbar={toggleNavbar} 
-        extractSearchTerms={extractSearchTerms}
-        setSearchTerms={setSearchTerms}
-        page={page}
-      />
-      <Navbar 
-        page={page} 
-        onPageChange={handlePageChange}
-        toggle={toggle} 
-        selectedCommunity = {selectedCommunity}
-        refreshTrigger={refreshTrigger}
-      />
-      <MainContent
-        page={page}
-        selectedCommunity = {selectedCommunity}
-        onPageChange = {handlePageChange}
-        toggle = {toggle}
-        searchTerms = {searchTerms}
-        exactSearchTerms = {exactSearchTerms}
-        refreshCommunitiesNav={refreshCommunitiesNav}
-      />
-    </div>
-  );
+  //welcome page
+  const [welcomePageOptionSelected, setWelcomePageOptionSelected] = useState(false)
+
+  function switchWelcomePageOption() {
+    setWelcomePageOptionSelected(!welcomePageOptionSelected);
+  }
+
+  if(!welcomePageOptionSelected) {
+    return (
+      <WelcomePage switchWelcomePageOption={switchWelcomePageOption} style={{ width: '100%', height: '100%' }}/>
+    )
+  } else{
+    return (
+      <div className="phreddit" style={{ width: '100%', height: '100%' }}>
+        <Banner 
+          onPageChange={handlePageChange} 
+          toggleNavbar={toggleNavbar} 
+          extractSearchTerms={extractSearchTerms}
+          setSearchTerms={setSearchTerms}
+          page={page}
+        />
+        <Navbar 
+          page={page} 
+          onPageChange={handlePageChange}
+          toggle={toggle} 
+          selectedCommunity = {selectedCommunity}
+          refreshTrigger={refreshTrigger}
+        />
+        <MainContent
+          page={page}
+          selectedCommunity = {selectedCommunity}
+          onPageChange = {handlePageChange}
+          toggle = {toggle}
+          searchTerms = {searchTerms}
+          exactSearchTerms = {exactSearchTerms}
+          refreshCommunitiesNav={refreshCommunitiesNav}
+        />
+      </div>
+    );
+  }
 }
