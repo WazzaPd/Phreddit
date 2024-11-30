@@ -12,17 +12,20 @@
 }
 
 /* Header style with animation */
-.welcome-header {
+.welcome-header, .register-header, .login-header {
     font-size: 36px;
     font-weight: bold;
     color: white;
     margin-bottom: 30px;
     text-align: center;
-    animation: slideDown 1.2s ease-in-out;
+    animation: slideDown 1s ease-in-out;
+}
+.register-header, .login-header {
+    animation: slideDown .5s ease-in-out;
 }
 
-/* Style for the card container */
-.options-container {
+/* Shared container style for all pages */
+.options-container, .register-container, .login-container {
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -32,11 +35,30 @@
     flex-direction: column;
     align-items: center;
     gap: 15px;
-    animation: fadeIn .8s ease-in-out;
+    animation: fadeIn .6s ease-in-out;
+}
+.register-container, .login-container {
+    animation: fadeIn .3s ease-in-out
 }
 
-/* Button styles */
-.options-container button {
+/* Input field styles */
+.register-container input, .login-container input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.register-container input:focus, .login-container input:focus {
+    outline: none;
+    border-color: #FF4500;
+    box-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+}
+
+
+.options-container button, .register-button, .login-button {
     background-color: #FF4500;
     color: white;
     font-size: 16px;
@@ -49,13 +71,30 @@
     width: 100%;
 }
 
-.options-container button:hover {
-    cursor: pointer;
+.options-container button:hover, .register-button:hover, .login-button:hover {
     background-color: #FF6347;
 }
 
-.options-container button:active {
+.options-container button:active, .register-button:active, .login-button:active {
     transform: scale(0.95);
+}
+
+
+/* Back button styles */
+.register-back-button, .login-back-button {
+    background-color: transparent;
+    color: #FF4500;
+    font-size: 14px;
+    font-weight: normal;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.register-back-button:hover, .login-back-button:hover {
+    color: #FF6347;
+    text-decoration: underline;
 }
 
 
@@ -80,4 +119,16 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.login-page, .register-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #FF4500, #FF6347);
+    margin: 0;
+    overflow: hidden;
 }
