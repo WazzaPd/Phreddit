@@ -1,7 +1,7 @@
 // Run this script to launch the server.
 // The server should run on localhost port 8000.
 // This is where you should start writing server-side code for this application.
-//require('dotenv').config(); // For environment variables
+require('dotenv').config(); // For environment variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -31,7 +31,10 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const app = express();
 
 // add router/middleware on receiving requests here
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow requests from the React app
+  credentials: true, // Allow cookies to be sent
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use((req, res, next) => {

@@ -67,3 +67,26 @@ End of Session:
 - finished react component AuthProvider
 
 Next session:
+- Create Schemas
+- Create context react component for global access to login state
+
+Toni Liang -- 12/07/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement JWT and authentication in server
+- Finish Register and Login pages
+- Add in validation and error handling
+-allow user to log in
+
+End of Session:
+- finished implementing JWT and authentication in server
+- finished implementing Register and Login pages
+- finished adding in validation and error handling
+- finished allowing user to log in
+
+Next session:
+- Implement Use case 4 Log out user
+- take user to welcome page after log out
+
+
+
