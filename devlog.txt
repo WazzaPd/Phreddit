@@ -53,3 +53,17 @@ Next session:
 - Create Scheamas 
 - Use authorization, authentication, and JWT
 - Verify user inputs
+
+Toni Liang, Joseph Wu -- 12/06/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement JWT and authentication in server
+- Create Schemas
+- Create context react component for global access to login state
+
+End of Session:
+- finished implementing JWT and authentication in server
+- finished creating schemas
+- finished react component AuthProvider
+
+Next session:

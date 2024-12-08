@@ -1,6 +1,8 @@
 import "../../stylesheets/welcomePage.css";
+import { useAuth } from "../context/AuthProvider";
 
 const LoginPage = (props) => {
+    const { isLoggedIn, user, login, logout } = useAuth();
     return ( 
         <div className="login-page">
             <h1 className="login-header">Log in to Phreddit</h1>

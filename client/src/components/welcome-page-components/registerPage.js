@@ -1,6 +1,8 @@
 import "../../stylesheets/welcomePage.css";
+import { useAuth } from "../context/AuthProvider";
 
 const RegisterPage = (props) => {
+    const { isLoggedIn, user, login, logout } = useAuth();
     return ( 
         <div className="register-page">
             <h1 className="register-header">Create a new account</h1>
