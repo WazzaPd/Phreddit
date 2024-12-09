@@ -1,7 +1,7 @@
 // Run this script to launch the server.
 // The server should run on localhost port 8000.
 // This is where you should start writing server-side code for this application.
-require('dotenv').config(); // For environment variables
+require('dotenv').config({ path: '../.env' }); // For environment variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -24,6 +24,8 @@ mongoose.connect(mongoDB)
 
 //Get default connection
 const db = mongoose.connection;
+
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
 
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

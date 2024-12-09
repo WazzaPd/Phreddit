@@ -2,10 +2,8 @@ import "../stylesheets/banner.css";
 import Section1 from "./banner-components/section1";
 import Section2 from "./banner-components/section2";
 import Section3 from "./banner-components/section3";
-import { useAuth } from "../context/AuthProvider";
 
 const Banner = (props) => {
-    const { isLoggedIn, user, login, logout } = useAuth();
     const { onPageChange, toggleNavbar, extractSearchTerms, setSearchTerms, page, switchWelcomePageOption } = props;
 
     const handleSearch = (searchTerm) => {
@@ -16,7 +14,10 @@ const Banner = (props) => {
 
     return (
         <header className="header">
-            <Section1 toggleNavbar={toggleNavbar} onPageChange={onPageChange} />
+            <Section1 
+                toggleNavbar={toggleNavbar} 
+                onPageChange={onPageChange} 
+                switchWelcomePageOption={switchWelcomePageOption}/>
             <Section2 onPageChange={onPageChange} onSearch={handleSearch} /> {/* Pass search handler to Section2 */}
             <Section3 
                 onPageChange={onPageChange} 
