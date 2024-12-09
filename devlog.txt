@@ -89,4 +89,24 @@ Next session:
 - take user to welcome page after log out
 
 
+Toni Liang -- 12/08/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement Use case 3 Log out user
+    - take user to welcome page after log out
+- Implement Use case 4 Banner User Guest
+    - Take user back to welcome page after clicking on Phreddit
+
+End of Session:
+- Implemented Use case 3 Log out user
+- Implemented Use case 4 Banner User Guest Partially
+
+Next session:
+- Finish missing features of Use case 4 
+- Implement Use case 5 
+- Implement Use case 6
+
+
+
+
 
