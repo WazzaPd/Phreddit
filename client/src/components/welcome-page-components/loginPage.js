@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthProvider";
 import axios from "axios";
 
 const LoginPage = (props) => {
-    const { login } = useAuth(); // AuthProvider function to handle login
+    const { login, setIsloggedIn } = useAuth(); // AuthProvider function to handle login
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -17,8 +17,8 @@ const LoginPage = (props) => {
         }
 
         try {
-            const response = await axios.post("http://localhost:8000/auth/login", { email, password });
-            login(response.data.user); // Update the auth context with the logged-in user
+            //const response = await axios.post("auth/login", { email, password });
+            await login(email, password); // Update the auth context with the logged-in user
             setError(""); // Clear any previous errors
             props.switchWelcomePageOption(); // Redirect to Phreddit
         } catch (err) {

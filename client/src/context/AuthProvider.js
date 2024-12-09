@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from "axios";
 
+axios.defaults.baseURL = "http://localhost:8000"; // Backend server
 axios.defaults.withCredentials = true; // Include cookies with requests
 
 const AuthContext = createContext();
@@ -29,12 +30,13 @@ export const AuthProvider = ({children}) => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post("/auth/login", {email, password});
+            const response = await axios.post("auth/login", {email, password});
             setUser(response.data.user);
             setIsLoggedIn(true);
         } catch (error) {
             console.error("Login failed: ", error.message);
             setIsLoggedIn(false);
+            throw error("throw error to prevent switching to welcome page in loginPage"); 
         }
     };
 
