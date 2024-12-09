@@ -2,10 +2,17 @@ import "../stylesheets/welcomePage.css";
 import React, { useState } from "react"
 import LoginPage from "./welcome-page-components/loginPage";
 import RegisterPage from "./welcome-page-components/registerPage";
+import { useAuth } from ".././context/AuthProvider.js";
 
 const WelcomePage = (props) => {
     const [showRegisterPage, setShowRegisterPage] = useState(false);
     const [showLoginPage, setShowLoginPage] = useState(false);
+
+    const { isLoggedIn } = useAuth();
+
+    if(isLoggedIn){
+        props.switchWelcomePageOption();
+    }
 
     if(showRegisterPage) {
         return (

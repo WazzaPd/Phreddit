@@ -159,6 +159,7 @@ export default function CreatePostForm(props){
                     postedDate: new Date(),
                     commentIDs: [],
                     views: 0,
+                    upvote: 0,
                 };
             
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from 'axios';
-
+import { useAuth } from "../../../context/AuthProvider";
 
 const CreateCommunityForm = (props) => {
   const { onPageChange } = props;
@@ -15,6 +15,8 @@ const CreateCommunityForm = (props) => {
   const [communityName, setCommunityName] = useState('');
   const [description, setDescription] = useState('');
   const [creatorUsername, setCreatorUsername] = useState('');
+
+  const { user } = useAuth();   //Auth provider
 
   async function engenderCommunityClicked() {
     let isValid = true;
@@ -47,6 +49,10 @@ const CreateCommunityForm = (props) => {
 
     if (creatorUsername.length === 0) {
       setCreatorUsernameError("Creator username cannot be empty");
+      setValidCreatorUsername(false);
+      isValid = false;
+    } else if(creatorUsername != user.name){
+      setCreatorUsernameError("Username Entered and Account Username must Match");
       setValidCreatorUsername(false);
       isValid = false;
     } else {

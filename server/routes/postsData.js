@@ -1,6 +1,7 @@
 const express = require('express');
 const posts = require('../models/posts.js');
 const communities = require('../models/communities.js');
+const auth = require('../middleware/auth');
 
 const postsRouter = express.Router();
 
@@ -76,6 +77,38 @@ postsRouter.post('/increment-view', async (req, res) => {
         res.status(500).json({message: 'Error getting data'});
     }
 });
+
+postsRouter.post('/toggle-upvote', auth, async (req, res) => {
+    const { postId } = req.body;
+    const userName = req.userName; // Assuming the `auth` middleware adds `userName`
+
+    try {
+        const post = await posts.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        if (post.upvoteUsers.includes(userName)) {
+            // User has already upvoted, remove upvote
+            post.upvoteUsers = post.upvoteUsers.filter(name => name !== userName);
+            if(post.upvote > 0){
+                post.upvote -= 1;
+            }
+        } else {
+            // User has not upvoted, add upvote
+            post.upvoteUsers.push(userName);
+            post.upvote += 1;
+        }
+
+        await post.save();
+        res.status(200).json({ upvote: post.upvote, upvoteUsers: post.upvoteUsers });
+    } catch (error) {
+        console.error('Error toggling upvote:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 
 postsRouter.use(async (req, res, next) =>{
     try {
