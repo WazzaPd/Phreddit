@@ -107,6 +107,23 @@ Next session:
 - Implement Use case 6
 
 
+Joseph Wu -- 12/09/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement use case 4 and 5
+
+End of Session:
+- implemented Use case 4, banner for Guest user
+- Partial implementation of use Case 5, banner for logged in user
+
+Next Session:
+- Finish implementation of Use case 5
 
 
+Toni Liang, Joseph Wu -- 12/10/2024
+--------------------------------------------------------------
+Goal for Session:
+Joseph:
+- Finish implementation for case 5 (Banner for logged in user)
+- Start implementation for case 18 (User Profile Page View)
 
