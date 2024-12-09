@@ -10,8 +10,9 @@ export default function Phreddit() {
   const [selectedCommunity, setSelectedCommunity] = useState(null); //for community pages
   const [searchTerms, setSearchTerms] = useState([]); // To store search terms
   const [exactSearchTerms, setExactSearchTerms] = useState('');
-
   const [refreshTrigger, setRefreshTrigger] = useState(false);
+  //welcome page
+  const [welcomePageOptionSelected, setWelcomePageOptionSelected] = useState(false)
 
   async function refreshCommunitiesNav() {
     console.log("Called: refreshCommunitiesNav");
@@ -53,9 +54,6 @@ export default function Phreddit() {
     }
   }
 
-  //welcome page
-  const [welcomePageOptionSelected, setWelcomePageOptionSelected] = useState(false)
-
   function switchWelcomePageOption() {
     setWelcomePageOptionSelected(!welcomePageOptionSelected);
   }
@@ -73,6 +71,7 @@ export default function Phreddit() {
           extractSearchTerms={extractSearchTerms}
           setSearchTerms={setSearchTerms}
           page={page}
+          switchWelcomePageOption={switchWelcomePageOption}
         />
         <Navbar 
           page={page} 
