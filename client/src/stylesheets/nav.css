@@ -93,6 +93,19 @@ nav > div {
     background-color: rgb(255, 68, 51);
     border-radius: 20px;
 }
+#create-community-button-logged-out{
+    color: rgb(209, 207, 207);
+    background-color: rgb(219, 219, 219);
+    border-radius: 20px;
+}
+
+#create-community-button-logged-out > p {
+    color: grey;
+}
+#create-community-button-logged-out:hover{
+    background-color: rgb(195, 195, 195); 
+}
+
 .community-page-highlighted{
     background-color: rgb(255, 68, 51);
 }

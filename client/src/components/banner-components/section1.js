@@ -6,8 +6,6 @@ const Section1 = (props) => {
     const {toggleNavbar, onPageChange} = props;
     const { isLoggedIn, logout } = useAuth(); // Access authentication state and logout function
 
-    console.log(!isLoggedIn);
-
     return ( 
         <div id="h-section1">
             <button id="dropdown-button" onClick={toggleNavbar}> {/*display default to none (ALSO NEEDS TO IMPLEMENT TOGGLE) */}

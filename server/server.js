@@ -1,7 +1,7 @@
 // Run this script to launch the server.
 // The server should run on localhost port 8000.
 // This is where you should start writing server-side code for this application.
-require('dotenv').config({ path: '../.env' }); // For environment variables
+require('dotenv').config({ path: '/.env' }); // For environment variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -11,12 +11,14 @@ const Posts = require('./models/posts.js');
 const Comments = require('./models/comments.js');
 const Communities = require('./models/communities.js');
 const LinkFlairs = require('./models/linkflairs.js');
+const Users = require('./models/user.js');
 
 const authRouter = require('./routes/auth.js');
 const CommunitiesDataRouter = require('./routes/communitiesData.js');
 const postsDataRouter = require('./routes/postsData.js');
 const linkflairsDataRouter = require('./routes/linkflairsData.js');
 const commentsDataRouter = require('./routes/commentsData.js');
+const usersDataRouter = require('./routes/usersData.js');
 
 //Mongoose default connection
 const mongoDB = 'mongodb://127.0.0.1:27017/phreddit';
@@ -49,6 +51,7 @@ app.use('/communitiesData', CommunitiesDataRouter);
 app.use('/postsData', postsDataRouter);
 app.use('/linkflairsData', linkflairsDataRouter);
 app.use('/commentsData', commentsDataRouter);
+app.use('/usersData', usersDataRouter);
 
 // Handle incoming Get requests here
 app.get("/", function (req, res) {

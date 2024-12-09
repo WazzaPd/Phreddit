@@ -24,6 +24,14 @@ const postSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    upvote: {
+        type: Number,
+        default: 0,
+        required: true
+    },
+    upvoteUsers: [{
+        type: String
+    }],
     linkFlairID: mongoose.SchemaTypes.ObjectID,
     commentIDs: [{
         type: mongoose.SchemaTypes.ObjectID,
