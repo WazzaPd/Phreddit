@@ -23,17 +23,32 @@ const Section3 = (props) => {
         <div id="h-section3">
             <img alt="img" src={cursorIcon} />
             <img alt="img" src={chatIcon} />
-            <button
-                id="create-post-button"
-                className={`${props.page === `create-post` ? "create-post-highlighted" : ""}`}
-                type="button"
-                onClick={() => onPageChange("create-post")}
-                >
-                <img alt="img" src={plusSign} style={{ maxWidth: "28px" }} />
-                <p>Create Post</p>
-            </button>
+            
+            {isLoggedIn ? (
+                <button
+                    id="create-post-button"
+                    className={`${props.page === `create-post` ? "create-post-highlighted" : ""}`}
+                    type="button"
+                    onClick={() => onPageChange("create-post")}
+                    >
+                    <img alt="img" src={plusSign} style={{ maxWidth: "28px" }} />
+                    <p>Create Post</p>
+                </button>
+            ) : (
+                <button style = {{color: `grey`}} 
+                onClick = {() => alert("User must loggin to create a Post")}>
+                    <p>Create Post</p>
+                </button>
+            )}
+
             <img alt="img" src={bellNotification} />
-            <img alt="img" src={pfpPhoto} />
+            {isLoggedIn ? (
+                // ! TO DO: this button should redirect to user profile (user profile button)
+                // should display the username
+                <button></button>
+            ) : (
+                <button>Guest</button>
+            ) }
 
             {/* Conditionally render the Logout button */}
 
