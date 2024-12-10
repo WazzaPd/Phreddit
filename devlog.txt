@@ -129,7 +129,43 @@ Next Session:
 Toni Liang, Joseph Wu -- 12/10/2024
 --------------------------------------------------------------
 Goal for Session:
+Toni:
+- Finish use case 6
+    - Distinguish between logged in and guest user
+- Finish use case 7
+    - Sort navbar communities section based on membership
+- Finish use case 8
+    - implement upvote and do not let guest user upvote
+
 Joseph:
 - Finish implementation for case 5 (Banner for logged in user)
 - Start implementation for case 18 (User Profile Page View)
+
+end of session:
+- finished use case 6
+- finished use case 7
+- finished use case 8
+
+Next session:
+- Finish use case 9
+- Finish use case 10
+- Finish use case 11
+- Finish use case 12
+
+Toni Liang-- 12/11/2024
+--------------------------------------------------------------
+Goal for Session:
+- Fix Errors in Upvote and Downvote
+- Fix Errors in Create Post
+- Fix Errors in Search Results
+
+End of Session:
+- Fixed errors in upvote and downvote
+- Fixed errors in create post
+- Fixed errors in search results
+Next Session:
+- Hopefully work until there is < 5 use cases left
+
+
+
 
