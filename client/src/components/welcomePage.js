@@ -36,7 +36,11 @@ const WelcomePage = (props) => {
                 <button className="register" onClick = { () => setShowRegisterPage(true) }>
                     Register Account
                 </button>
-                <button className="continue-as-guest" onClick = { () => props.switchWelcomePageOption() }>
+                <button className="continue-as-guest" onClick = { 
+                    () => {
+                        props.switchWelcomePageOption();
+                        props.handlePageChange("home");
+                    } }>
                     Continue as Guest
                 </button>
             </div>

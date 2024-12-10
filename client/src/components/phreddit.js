@@ -60,7 +60,7 @@ export default function Phreddit() {
 
   if(!welcomePageOptionSelected) {
     return (
-      <WelcomePage switchWelcomePageOption={switchWelcomePageOption} style={{ width: '100%', height: '100%' }}/>
+      <WelcomePage handlePageChange={handlePageChange} switchWelcomePageOption={switchWelcomePageOption} style={{ width: '100%', height: '100%' }}/>
     )
   } else{
     return (
