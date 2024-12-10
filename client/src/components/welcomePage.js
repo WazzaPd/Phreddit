@@ -22,7 +22,7 @@ const WelcomePage = (props) => {
 
     if(showLoginPage) {
         return (
-            <LoginPage switchWelcomePageOption = {props.switchWelcomePageOption} setShowLoginPage = {setShowLoginPage} />
+            <LoginPage handlePageChange={props.handlePageChange} switchWelcomePageOption = {props.switchWelcomePageOption} setShowLoginPage = {setShowLoginPage} />
         )
     }
 

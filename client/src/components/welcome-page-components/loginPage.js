@@ -10,6 +10,7 @@ const LoginPage = (props) => {
     const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
+        props.handlePageChange("home");
         e.preventDefault();
         if (!email || !password) {
             setError("Email and password are required.");
