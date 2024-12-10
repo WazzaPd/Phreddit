@@ -14,6 +14,7 @@ const CommunityPageView = (props) => {
   const [sort, setSort] = useState('newest');
   const [postData, setPostData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshMembers, setrefreshMembers] = useState(false);
 
   const getFreshestComment = useCallback(async (commentID) => {
     const currentComment = comments.find(comment => comment._id === commentID);
@@ -88,6 +89,29 @@ const CommunityPageView = (props) => {
     fetchCommunityData();
   }, [selectedCommunityId, sort]); // Re-run if selectedCommunityId or sort changes
 
+  // This Use Effect is only for the join and leave community button
+  useEffect(() => {
+    if (refreshMembers){
+      const fetchCommunityData = async () => {
+        setLoading(true);
+        try {
+          const [communityRes] = await Promise.all([
+            axios.get(`http://localhost:8000/communitiesData/${selectedCommunityId}`),
+          ]);
+
+          setCommunity(communityRes.data);
+        } catch (error) {
+          console.error("Error fetching community data:", error);
+        } finally {
+          setLoading(false);
+          setrefreshMembers(false);
+        }
+      };
+      
+      fetchCommunityData();
+    }
+  }, [refreshMembers]); // run if selectedcommunity.members changes
+
 
 
   if (!community) {
@@ -106,6 +130,8 @@ const CommunityPageView = (props) => {
         setLoading={setLoading}
         onSortChange={handleSortChange}
         community={community}
+        createdBy={community.createdBy}
+        setrefreshMembers={setrefreshMembers}
       />
 
       {/* Community Posts */}

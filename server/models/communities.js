@@ -23,6 +23,10 @@ const communitySchema = new mongoose.Schema({
         type: Number,
         default: 1
     },
+    createdBy: {
+        type: String,
+        required: true
+    },
     postIDs: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Post"

@@ -21,7 +21,7 @@ export default function MainContent (props){
     const [parentCommentID, setParentCommentID] = useState(undefined);
 
     // Data from the server
-    const [communitiesData, setCommunitiesData] = useState(null);
+    const [communitiesData, setCommunitiesData] = useState({});
     const [commentsData, setCommentsData] = useState(null);
     const [linkflairsData, setLinkflairsData] = useState(null);
     const [postsData, setPostsData] = useState(null);

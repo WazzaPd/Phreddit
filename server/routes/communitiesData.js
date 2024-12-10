@@ -11,12 +11,51 @@ communitiesDataRouter.post('/appendCommunities', async (req, res) => {
         description,
         members,
         memberCount,
+        createdBy,
         postIDs: [],
     });
 
     try {
         const savedCommunity = await newCommunity.save();
         res.status(201).json(savedCommunity);
+    } catch (error) {
+        res.status(500).json({ message: 'Error appending community', error });
+    }
+});
+
+communitiesDataRouter.post('/joinCommunity', async (req, res) => {
+    const {username, userID, communityID} = req.body;
+
+    console.log(username);
+    console.log(communityID);
+
+    // TO DO: Add a update to the users collection and add the community joined
+    try {
+        const community = await communities.findByIdAndUpdate(
+            communityID,
+            { $push: {members: username}},
+            { new: true, runValidators: true}
+        );
+        res.status(200).json(community);
+    } catch (error) {
+        res.status(500).json({ message: 'Error appending community', error });
+    }
+});
+
+communitiesDataRouter.post('/leaveCommunity', async (req, res) => {
+    const {username, userID, communityID} = req.body;
+
+    console.log(username);
+    console.log(communityID);
+
+    // TO DO: Add a update to the users collection and remove the community joined
+    try {
+        const community = await communities.findByIdAndUpdate(
+            communityID,
+            { $pull: {members: username}},
+            { new: true, runValidators: true}
+        );
+        res.status(200).json(community);
     } catch (error) {
         res.status(500).json({ message: 'Error appending community', error });
     }

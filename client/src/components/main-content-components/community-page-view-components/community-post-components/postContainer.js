@@ -11,10 +11,7 @@ const PostContainer = (props) => {
       <PostHeader post={post} /> {/* No need to display the community name */}
       <PostTitle post={post} setPost={setPost} onPageChange={onPageChange} linkFlairs={linkFlairs} />
       <CharCount post={post} />
-      <StatCounts post={post} 
-        //data={data}
-        comments={comments}
-      />
+      <StatCounts divClass="stat-counts" post={post} commentsData={comments}/>
       <div className="dotted-line">
         <p></p>
       </div>

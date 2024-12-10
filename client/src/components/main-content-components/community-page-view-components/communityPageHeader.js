@@ -1,8 +1,15 @@
 import HeaderTitle from "./community-page-header-components/headerTitle";
 import NumPosts from "./community-page-header-components/numPosts";
 import SortButtons from "./community-page-header-components/sortButtons";
+import { useAuth } from "../../../context/AuthProvider";
+import axios from "axios";
 
 const CommunityPageHeader = (props) => {
+
+  const { user, isLoggedIn } = useAuth();
+
+  console.log(props.community)
+
   function timeAgo(pastDate) {
 
     if (!(pastDate instanceof Date)) {
@@ -38,6 +45,39 @@ const CommunityPageHeader = (props) => {
         return 'just now';
     }
   }
+
+  async function handleJoinCommunity(){
+    try {
+      const response = await axios.post("http://localhost:8000/communitiesData/joinCommunity", {
+        username: user.displayName,
+        userID: user.id,
+        communityID: props.community._id
+      });
+
+      props.setrefreshMembers(true);
+
+    } catch (error) {
+        console.error("Error joining community:", error.response?.data || error.message);
+        alert("Failed to Join Community. Please try again.");
+    }
+  }
+
+  async function handleLeaveCommunity(){
+    try {
+      const response = await axios.post("http://localhost:8000/communitiesData/leaveCommunity", {
+        username: user.displayName,
+        userID: user.id,
+        communityID: props.community._id
+      });
+
+      props.setrefreshMembers(true);
+
+    } catch (error) {
+        console.error("Error joining community:", error.response?.data || error.message);
+        alert("Failed to Join Community. Please try again.");
+    }
+  }
+
   return (
     <div id="community-header-container">
       <div id="community-header-title-and-button-container">
@@ -46,6 +86,14 @@ const CommunityPageHeader = (props) => {
       </div>
       <p>{props.community.description}</p>
       <p>Start Date: {timeAgo(props.community.startDate)}</p>
+      <p>Created By: {props.createdBy}</p>
+      { isLoggedIn && 
+        (props.community.members.includes(user.displayName) ? (
+          <button onClick={handleLeaveCommunity}>Leave Community</button>
+        ) : (
+          <button onClick={handleJoinCommunity}>Join Community</button>
+        ))
+      }
       <div style = {{display: "flex", flexDirection: "row", alignItems: "center", columnGap: "20px"}}>
         <NumPosts numPosts={props.numPosts} /> 
         <div id="number-of-members">             {/* Extra requirement (member count) */}

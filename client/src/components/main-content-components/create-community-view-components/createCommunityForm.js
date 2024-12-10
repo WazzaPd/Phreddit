@@ -61,13 +61,13 @@ const CreateCommunityForm = (props) => {
     }
 
     if (isValid) {
-      console.log("THIS RUNS");
       try{;
         const community = await axios.post('http://localhost:8000/communitiesData/appendCommunities', {
           name: communityName,
           description: description,
           members: [creatorUsername],
           memberCount: 1,
+          createdBy: creatorUsername,
           postIDs: [],
         });
         console.log("created community", community.data);

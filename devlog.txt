@@ -126,6 +126,7 @@ End of Session:
 Next Session:
 - Finish implementation of Use case 5
 
+
 Toni Liang, Joseph Wu -- 12/10/2024
 --------------------------------------------------------------
 Goal for Session:
@@ -152,7 +153,7 @@ Next session:
 - Finish use case 11
 - Finish use case 12
 
-Toni Liang-- 12/11/2024
+Toni Liang-- 12/10/2024
 --------------------------------------------------------------
 Goal for Session:
 - Fix Errors in Upvote and Downvote
@@ -166,6 +167,13 @@ End of Session:
 Next Session:
 - Hopefully work until there is < 5 use cases left
 
+Joseph Wu -- 12/10/2024
+--------------------------------------------------------------
+Goal for Session:
+- Finish use case 10 (communities)
 
+End of Session:
+- Completed case 10
 
-
+Next Session:
+- Work on use case 9 (logged in posts page)
