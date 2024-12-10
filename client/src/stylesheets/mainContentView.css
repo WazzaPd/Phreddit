@@ -205,13 +205,13 @@
     width: 20px;
 }
 
-.upvote-button{
+.upvote-button, .downvote-button {
     margin-left: 5px;
     padding: 10px 5px 10px 5px;
     border-radius: 20px;
     border-width: 1px;
 }
 
-.upvote-button:hover{
+.upvote-button:hover, .downvote-button:hover{
     background-color: rgb(255, 68, 51);
 }
