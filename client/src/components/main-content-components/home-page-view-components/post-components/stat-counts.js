@@ -6,15 +6,23 @@ const StatCounts = (props) => {
     const { divClass, post, commentsData } = props;
     const { user, isLoggedIn } = useAuth();
 
-    const [upvoteCount, setUpvoteCount] = useState(post.upvote);
-    const [upvoteUsers, setUpvoteUsers] = useState([...post.upvoteUsers]);
-    const [hasUpvoted, setHasUpvoted] = useState(upvoteUsers.includes(user?.name));
+    const [voteCount, setVoteCount] = useState(post.votes);
+    const [upVoteUsers, setUpVoteUsers] = useState([...post.upVoteUsers]);
+    const [downVoteUsers, setDownVoteUsers] = useState([...post.downVoteUsers]);
+    const [hasUpvoted, setHasUpvoted] = useState(false);
+    const [hasDownvoted, setHasDownvoted] = useState(false);
 
     useEffect(() => {
-        if(isLoggedIn){
-            setHasUpvoted(upvoteUsers.includes(user.name));
+        if (isLoggedIn && user?.name) {
+            setHasUpvoted(upVoteUsers.includes(user.name));
+            setHasDownvoted(downVoteUsers.includes(user.name));
+        } else {
+            setHasUpvoted(false);
+            setHasDownvoted(false);
         }
-    }, [upvoteUsers, user]);
+    }, [upVoteUsers, downVoteUsers, user, isLoggedIn]);
+
+
     
     const countComments = (post) => {
         let count = 0;
@@ -39,36 +47,49 @@ const StatCounts = (props) => {
         return count;
     };
 
-    const toggleUpvote = async () => {
+    const toggleVote = async (voteType) => {
+        if (!isLoggedIn) {
+            alert("You must log in to vote.");
+            return;
+        }
+
         try {
-            if(!isLoggedIn){
-                alert("Must loggin to upvote");
-                return;
-            }
-            const response = await axios.post("http://localhost:8000/postsData/toggle-upvote", {
+            const response = await axios.post("http://localhost:8000/postsData/toggle-vote", {
                 postId: post._id,
+                voteType,
             });
 
-            const newUpvoteUsers = response.data.upvoteUsers;
-            setUpvoteCount(response.data.upvote);
-            setUpvoteUsers(newUpvoteUsers);
-
+            setVoteCount(response.data.votes);
+            setUpVoteUsers(response.data.upVoteUsers);
+            setDownVoteUsers(response.data.downVoteUsers);
         } catch (error) {
-            console.error("Error toggling upvote:", error.response?.data || error.message);
-            alert("Failed to update upvote. Please try again.");
+            console.error("Error toggling vote:", error.response?.data || error.message);
+            alert("Failed to update vote. Please try again.");
         }
     };
 
     const commentCount = countComments(post);
+
+    // console.log("hasUpvoted: " + hasUpvoted);
     return (
         <div className={divClass}>
             <div>
-                {post.views} views |
-                {commentCount} comments |
-                <button className="upvote-button" onClick={toggleUpvote}>
-                    {hasUpvoted ? "Remove Upvote ↓" : "Upvote ↑"}
+                {post.views} views | {commentCount} comments |
+                <button
+                    className="upvote-button"
+                    onClick={() => toggleVote("upvote")}
+                    style={hasUpvoted ? { backgroundColor: "rgb(255, 68, 51)" } : {}}
+                >
+                    Upvote ↑
                 </button>
-                : {upvoteCount}
+                <p style = {{display: "inline", fontWeight: "bold", fontSize: "20px", marginLeft: "10px", marginRight: "5px"}}>{voteCount}</p>
+                <button
+                    className="downvote-button"
+                    onClick={() => toggleVote("downvote")}
+                    style={hasDownvoted ? { backgroundColor: "rgb(255, 68, 51)" } : {}}
+                >
+                    Downvote ↓
+                </button>
             </div>
         </div>
     );

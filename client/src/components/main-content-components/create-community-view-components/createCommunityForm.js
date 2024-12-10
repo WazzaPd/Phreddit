@@ -46,7 +46,7 @@ const CreateCommunityForm = (props) => {
       setDescriptionError('');
       setValidDescription(true);
     }
-
+    console.log(user.name);
     if (creatorUsername.length === 0) {
       setCreatorUsernameError("Creator username cannot be empty");
       setValidCreatorUsername(false);

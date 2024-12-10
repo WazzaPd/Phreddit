@@ -46,7 +46,7 @@ const Section3 = (props) => {
             alert("Logout failed. Please try again.");
         }
     };
-    console.log("isLoggedIn: " + isLoggedIn);
+    // console.log("isLoggedIn: " + isLoggedIn);
     return (
         <div id="h-section3">
             <img alt="img" src={cursorIcon} />
