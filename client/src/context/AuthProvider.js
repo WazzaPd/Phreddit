@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) => {
         }
 
         checkToken();
-    }, []);
+    }, [isLoggedIn]);
 
     const login = async (email, password) => {
         try {

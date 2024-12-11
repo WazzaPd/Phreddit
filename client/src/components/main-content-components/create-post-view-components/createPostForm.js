@@ -2,6 +2,7 @@ import {useState, useRef} from 'react';
 import axios from 'axios';
 import SelectCommunity from './selectCommunity';
 import SelectLinkFliar from './selectLinkFlair';
+import { useAuth } from "../../../context/AuthProvider";
 
 // To Implement: Adding Post after clicking submit button. Use useRef?
 export default function CreatePostForm(props){
@@ -11,12 +12,12 @@ export default function CreatePostForm(props){
     const [titleError, setTitleError] = useState([false, '']);
     const [linkFlairError, setLinkFlairError] = useState(false);
     const [contentError, setContentError] = useState(false);
-    const [usernameError, setUsernameError] = useState(false);
+
+    const { user } = useAuth();
 
     // Refs for accessing input values
     const titleRef = useRef();
     const contentRef = useRef();
-    const usernameRef = useRef();
     const communityRef = useRef();
     const linkFlairRef = useRef();
 
@@ -48,13 +49,13 @@ export default function CreatePostForm(props){
             )}
             <label htmlFor="create-post-content">Content: </label>
             <textarea ref={contentRef} id="create-post-content" placeholder="* Required (Description)"></textarea>
-            {usernameError && (
+            {/* {usernameError && (
             <p id="create-post-username-error" style={{ color: 'red' }}>
                 *Username cannot be empty
             </p>
             )}
             <label htmlFor="create-post-username">Username: </label>
-            <input ref={usernameRef} id="create-post-username" placeholder="* Required"></input>
+            <input ref={usernameRef} id="create-post-username" placeholder="* Required"></input> */}
             <button id="submit-post" onClick={(event)=>handleSubmit(event)}>Submit</button>
         </form>
     );
@@ -62,7 +63,7 @@ export default function CreatePostForm(props){
     function checkValidity(){
         const title = titleRef.current.value;
         const content = contentRef.current.value;
-        const username = usernameRef.current.value;
+        const username = user.name;
         const community = communityRef.current.value;
         const linkFlair = linkFlairRef.current.value;
 
@@ -102,14 +103,6 @@ export default function CreatePostForm(props){
             setContentError(false);
         }
 
-        if(!username){
-            setUsernameError(true);
-            valid = false;
-        } else {
-            setUsernameError(false);
-        }
-
-
         return valid;
     }
 
@@ -117,7 +110,7 @@ export default function CreatePostForm(props){
         event.preventDefault();
         const title = titleRef.current.value;
         const content = contentRef.current.value;
-        const username = usernameRef.current.value;
+        const username = user.name;
         const community = communityRef.current.value;
         const linkFlair = linkFlairRef.current.value;
 
@@ -160,8 +153,6 @@ export default function CreatePostForm(props){
                     commentIDs: [],
                     views: 0,
                     votes: 0,
-                    upVoteUsers: [],
-                    downVoteUsers: [],
                 };
             
 
@@ -170,12 +161,6 @@ export default function CreatePostForm(props){
                 communityName: community
             });
 
-            // Log or handle the gathered values
-            // console.log('Title:', title);
-            // console.log('Content:', content);
-            // console.log('Username:', username);
-            // console.log('Community:', community);
-            // console.log('Link Flair:', linkFlair);
             props.onPageChange('home');
         }
     }
