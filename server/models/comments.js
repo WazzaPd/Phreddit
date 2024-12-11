@@ -18,7 +18,12 @@ const commentSchema = new mongoose.Schema({
     commentIDs: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Comment"
-    }]
+    }],
+    votes: {
+        type: Number,
+        default: 0,
+        required: true
+    }
 });
 
 module.exports = mongoose.model("Comment", commentSchema);

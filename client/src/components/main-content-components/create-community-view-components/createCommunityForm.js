@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import { useAuth } from "../../../context/AuthProvider";
 
@@ -9,14 +9,16 @@ const CreateCommunityForm = (props) => {
   const [communityNameError, setCommunityNameError] = useState('');
   const [validDescription, setValidDescription] = useState(true);
   const [descriptionError, setDescriptionError] = useState('');
-  const [validCreatorUsername, setValidCreatorUsername] = useState(true);
-  const [creatorUsernameError, setCreatorUsernameError] = useState('');
 
   const [communityName, setCommunityName] = useState('');
   const [description, setDescription] = useState('');
   const [creatorUsername, setCreatorUsername] = useState('');
 
   const { user } = useAuth();   //Auth provider
+
+  useEffect(() => {
+    setCreatorUsername(user.name);
+  }, [user]);
 
   async function engenderCommunityClicked() {
     let isValid = true;
@@ -46,22 +48,14 @@ const CreateCommunityForm = (props) => {
       setDescriptionError('');
       setValidDescription(true);
     }
-    console.log(user.name);
-    if (creatorUsername.length === 0) {
-      setCreatorUsernameError("Creator username cannot be empty");
-      setValidCreatorUsername(false);
-      isValid = false;
-    } else if(creatorUsername != user.name){
-      setCreatorUsernameError("Username Entered and Account Username must Match");
-      setValidCreatorUsername(false);
-      isValid = false;
-    } else {
-      setCreatorUsernameError('');
-      setValidCreatorUsername(true);
-    }
+
 
     if (isValid) {
-      try{;
+      try{
+        console.log(communityName);
+        console.log(description);
+        console.log(creatorUsername);
+        
         const community = await axios.post('http://localhost:8000/communitiesData/appendCommunities', {
           name: communityName,
           description: description,
@@ -76,6 +70,7 @@ const CreateCommunityForm = (props) => {
         
       }catch(e){
         console.log("error creating community", e);
+        alert("COMMUNITY NAME ALREADY EXISTS");
       }
       
     }
@@ -100,15 +95,6 @@ const CreateCommunityForm = (props) => {
         onChange={(e) => setDescription(e.target.value)} 
       />
       {!validDescription && <p className="create-community-errors">{descriptionError}</p>}
-
-      <input
-        type="text"
-        id="create-community-creator-username"
-        placeholder="*Creator Username"
-        value={creatorUsername}
-        onChange={(e) => setCreatorUsername(e.target.value)} 
-      />
-      {!validCreatorUsername && <p className="create-community-errors">{creatorUsernameError}</p>}
 
       <button
         id="create-community-engender-community"
