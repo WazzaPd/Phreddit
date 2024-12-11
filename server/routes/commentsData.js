@@ -36,6 +36,32 @@ commentsRouter.post('/appendComment', async (req, res) => {
     }
 });
 
+commentsRouter.post('/toggle-vote', async (req, res) => {
+    const { commentId, voteType } = req.body;
+
+    try {
+        const comment = await comments.findById(commentId);
+        if (!comment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        if (voteType === 'upvote') {
+            comment.votes += 1; // Increment votes
+        } else if (voteType === 'downvote') {
+            comment.votes -= 1; // Decrement votes
+        } else {
+            return res.status(400).json({ message: 'Invalid vote type' });
+        }
+
+        await comment.save();
+        res.status(200).json({ votes: comment.votes });
+    } catch (error) {
+        console.error('Error toggling vote:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 commentsRouter.use(async (req, res, next) =>{
     try {
         const commentsData = await comments.find({});

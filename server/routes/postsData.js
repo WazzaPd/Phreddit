@@ -77,9 +77,8 @@ postsRouter.post('/increment-view', async (req, res) => {
         res.status(500).json({message: 'Error getting data'});
     }
 });
-postsRouter.post('/toggle-vote', auth, async (req, res) => {
+postsRouter.post("/toggle-vote", auth, async (req, res) => {
     const { postId, voteType } = req.body;
-    const userName = req.userName; // from auth middleware
 
     try {
         const post = await posts.findById(postId);
@@ -87,54 +86,19 @@ postsRouter.post('/toggle-vote', auth, async (req, res) => {
             return res.status(404).json({ message: "Post not found" });
         }
 
-        const hasUpvoted = post.upVoteUsers.includes(userName);
-        const hasDownvoted = post.downVoteUsers.includes(userName);
-
         if (voteType === "upvote") {
-            if (hasUpvoted) {
-                // User currently upvoted, remove their upvote (go to neutral)
-                post.upVoteUsers = post.upVoteUsers.filter(u => u !== userName);
-                post.votes -= 1; // removing an upvote goes from +1 to 0
-            } else {
-                // User not currently upvoted
-                if (hasDownvoted) {
-                    // They had downvoted, remove the downvote first
-                    post.downVoteUsers = post.downVoteUsers.filter(u => u !== userName);
-                    post.votes += 1; // remove downvote effect: -1 to 0
-                }
-                // Now add upvote
-                post.upVoteUsers.push(userName);
-                post.votes += 1; // adding upvote: 0 to +1
-            }
+            post.votes += 1; // Increment vote count
         } else if (voteType === "downvote") {
-            if (hasDownvoted) {
-                // User currently downvoted, remove their downvote (go to neutral)
-                post.downVoteUsers = post.downVoteUsers.filter(u => u !== userName);
-                post.votes += 1; // removing a downvote: -1 to 0
-            } else {
-                // User not currently downvoted
-                if (hasUpvoted) {
-                    // They had upvoted, remove the upvote first
-                    post.upVoteUsers = post.upVoteUsers.filter(u => u !== userName);
-                    post.votes -= 1; // remove upvote effect: +1 to 0
-                }
-                // Now add downvote
-                post.downVoteUsers.push(userName);
-                post.votes -= 1; // adding downvote: 0 to -1
-            }
+            post.votes -= 1; // Decrement vote count
         } else {
             return res.status(400).json({ message: "Invalid vote type" });
         }
 
         await post.save();
-        return res.status(200).json({
-            votes: post.votes,
-            upVoteUsers: post.upVoteUsers,
-            downVoteUsers: post.downVoteUsers,
-        });
+        return res.status(200).json({ votes: post.votes });
     } catch (error) {
         console.error("Error toggling vote:", error);
-        res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: "Internal server error" });
     }
 });
 

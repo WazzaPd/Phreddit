@@ -177,3 +177,33 @@ End of Session:
 
 Next Session:
 - Work on use case 9 (logged in posts page)
+
+Toni Liang -- 12/10/2024
+--------------------------------------------------------------
+Goal for Session:
+- Differentiate implementation of upvote and downvote in use case 9
+- Try to implement more use cases. Use cases not yet implemented:
+    - use case 9 (sorting)
+    - use case 12 (sorting)
+    - use case 13 
+    - use case 14 
+    - use case 15 
+    - use case 16 
+    - use case 17 
+    - use case 18 
+    - use case 19 
+    - use case 20 
+
+End of Session:
+Finished use cases 11, 13, 15, 16, 17
+Note: for use case 13, upvote, and downvote need to be implemented
+
+Next Session:
+Finish use cases. Use cases not yet implemented:
+    - use case 9 (sorting)
+    - use case 12 (sorting)
+    - use case 14 (post & comment upvote and downvote)
+    - use case 18 
+    - use case 19 
+    - use case 20
+
