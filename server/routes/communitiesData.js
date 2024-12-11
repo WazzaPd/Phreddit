@@ -4,18 +4,24 @@ const communities = require('../models/communities.js');
 const communitiesDataRouter = express.Router();
 
 communitiesDataRouter.post('/appendCommunities', async (req, res) => {
-    const {name, description, members, memberCount} = req.body;
-
-    const newCommunity = new communities({
-        name,
-        description,
-        members,
-        memberCount,
-        createdBy,
-        postIDs: [],
-    });
+    const { name, description, members, memberCount, createdBy } = req.body;
 
     try {
+        // Check if a community with the same name already exists
+        const existingCommunity = await communities.findOne({ name });
+        if (existingCommunity) {
+            return res.status(400).json({ message: 'Community name already exists' });
+        }
+
+        const newCommunity = new communities({
+            name,
+            description,
+            members,
+            memberCount,
+            createdBy,
+            postIDs: [],
+        });
+
         const savedCommunity = await newCommunity.save();
         res.status(201).json(savedCommunity);
     } catch (error) {

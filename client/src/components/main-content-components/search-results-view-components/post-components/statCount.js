@@ -4,25 +4,9 @@ import axios from "axios";
 
 const StatCounts = (props) => {
     const { divClass, post, commentsData } = props;
-    const { user, isLoggedIn } = useAuth();
+    const { isLoggedIn } = useAuth();
 
     const [voteCount, setVoteCount] = useState(post.votes);
-    const [upVoteUsers, setUpVoteUsers] = useState([...post.upVoteUsers]);
-    const [downVoteUsers, setDownVoteUsers] = useState([...post.downVoteUsers]);
-    const [hasUpvoted, setHasUpvoted] = useState(false);
-    const [hasDownvoted, setHasDownvoted] = useState(false);
-
-    useEffect(() => {
-        if (isLoggedIn && user?.name) {
-            setHasUpvoted(upVoteUsers.includes(user.name));
-            setHasDownvoted(downVoteUsers.includes(user.name));
-        } else {
-            setHasUpvoted(false);
-            setHasDownvoted(false);
-        }
-    }, [upVoteUsers, downVoteUsers, user, isLoggedIn]);
-
-
     
     const countComments = (post) => {
         let count = 0;
@@ -47,7 +31,7 @@ const StatCounts = (props) => {
         return count;
     };
 
-    const toggleVote = async (voteType) => {
+    const handleVote = async (voteType) => {
         if (!isLoggedIn) {
             alert("You must log in to vote.");
             return;
@@ -60,8 +44,6 @@ const StatCounts = (props) => {
             });
 
             setVoteCount(response.data.votes);
-            setUpVoteUsers(response.data.upVoteUsers);
-            setDownVoteUsers(response.data.downVoteUsers);
         } catch (error) {
             console.error("Error toggling vote:", error.response?.data || error.message);
             alert("Failed to update vote. Please try again.");
@@ -77,16 +59,24 @@ const StatCounts = (props) => {
                 {post.views} views | {commentCount} comments |
                 <button
                     className="upvote-button"
-                    onClick={() => toggleVote("upvote")}
-                    style={hasUpvoted ? { backgroundColor: "rgb(255, 68, 51)" } : {}}
+                    onClick={() => handleVote("upvote")}
                 >
                     Upvote ↑
                 </button>
-                <p style = {{display: "inline", fontWeight: "bold", fontSize: "20px", marginLeft: "10px", marginRight: "5px"}}>{voteCount}</p>
+                <p
+                    style={{
+                        display: "inline",
+                        fontWeight: "bold",
+                        fontSize: "20px",
+                        marginLeft: "10px",
+                        marginRight: "5px",
+                    }}
+                >
+                    {voteCount}
+                </p>
                 <button
                     className="downvote-button"
-                    onClick={() => toggleVote("downvote")}
-                    style={hasDownvoted ? { backgroundColor: "rgb(255, 68, 51)" } : {}}
+                    onClick={() => handleVote("downvote")}
                 >
                     Downvote ↓
                 </button>

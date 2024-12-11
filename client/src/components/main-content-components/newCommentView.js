@@ -1,16 +1,19 @@
 import {useState, useRef} from 'react';
 import axios from 'axios';
+import { useAuth } from "../../context/AuthProvider";
 
 export default function NewCommentView( props ){
 
     const { postID, parentCommentID, onPageChange} = props;
 
     const [contentError, setContentError] = useState([false, '']);
-    const [usernameError, setUsernameError] = useState(false);
+
+
+    const { user } = useAuth();
 
     // Refs for accessing input values
     const contentRef = useRef();
-    const usernameRef = useRef();
+
 
     return(
         <div id="new-comment-container">
@@ -21,19 +24,14 @@ export default function NewCommentView( props ){
                 {contentError[1]}
             </p>
             )}
-            <input ref={usernameRef} id="new-comment-username" placeholder="* Username"></input>
-            {usernameError && (
-            <p className="new-comment-errors" style={{ color: 'red' }}>
-                *Username cannot be empty
-            </p>
-            )}
+
             <button id="submit-comment" onClick={(event)=>handleSubmit(event)}>Submit Comment</button>
         </div>
     )
 
     function checkValidity(){
         const content = contentRef.current.value;
-        const username = usernameRef.current.value;
+        const username = user.name;
 
         let valid = true;
 
@@ -48,12 +46,6 @@ export default function NewCommentView( props ){
             setContentError(false);
         }
 
-        if(!username){
-            setUsernameError(true);
-            valid = false;
-        } else {
-            setUsernameError(false);
-        }
 
         console.log(content);
         console.log(username);
@@ -64,7 +56,7 @@ export default function NewCommentView( props ){
     async function handleSubmit(event){
         event.preventDefault();
         const content = contentRef.current.value;
-        const username = usernameRef.current.value;
+        const username = user.name;
 
         if(checkValidity()){
             const addComment =
@@ -73,6 +65,7 @@ export default function NewCommentView( props ){
                 commentIDs: [],
                 commentedBy: username,
                 commentedDate: new Date(),
+                votes: 0,
             }
 
             await axios.post('http://localhost:8000/commentsData/appendComment', {

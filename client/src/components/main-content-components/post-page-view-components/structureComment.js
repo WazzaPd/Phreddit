@@ -1,6 +1,10 @@
+import { useAuth } from "../../../context/AuthProvider";
+import axios from 'axios';
+import { react, useState } from 'react';
 export default function StructureComments(props){
 
     const {commentsData, commentIDs} = props;
+    const { isLoggedIn } = useAuth();
 
     let current_comments = [];
     for(let i = 0; i<commentIDs.length; i++){
@@ -8,6 +12,34 @@ export default function StructureComments(props){
     }
 
     current_comments.sort((a, b) => new Date(b.commentedDate) - new Date(a.commentedDate)); 
+
+
+    const handleVote = async (commentId, voteType) => {
+        // if (!isLoggedIn) {
+        //     alert("You must log in to vote.");
+        //     return;
+        // }
+
+        // try {
+        //     const response = await axios.post("http://localhost:8000/commentsData/toggle-vote", {
+        //         commentId,
+        //         voteType,
+        //     });
+
+        //     // Update the votes for the specific comment
+        //     const updatedComment = commentsData.find((comment) => comment._id === commentId);
+        //     if (updatedComment) {
+        //         updatedComment.votes = response.data.votes;
+        //     }
+
+        //     // Trigger a re-render
+        //     props.onPageChange(props.currentPage);
+        // } catch (error) {
+        //     console.error("Error toggling vote:", error.response?.data || error.message);
+        //     alert("Failed to update vote. Please try again.");
+        // }
+    };
+    
     
     return(
         <div id="comments-container">
@@ -18,16 +50,21 @@ export default function StructureComments(props){
                         <div id="individual-comment" key={comment._id}>
                             <div id="comment-username-time">
                                 <p>
-                                    {comment.commentedBy} | {timeAgo(comment.commentedDate)}
+                                    {comment.commentedBy} | {timeAgo(comment.commentedDate)} | 
+                                    {isLoggedIn && <button className="upvote-button" onClick={() => handleVote("upvote")}>Upvote ↑</button>}
+                                    <p style = {{display: "inline", fontWeight: "bold"}}> votes: {"#"}</p>
+                                    {isLoggedIn && <button className="downvote-button" onClick={() => handleVote("downvote")}>Downvote ↓</button>}
                                 </p>
                             </div>
                             <div id="comment-content">
                                 <p>{comment.content}</p>
                             </div>
-                            <button id="add-reply-button" onClick={()=>{
+                            {isLoggedIn && <button id="add-reply-button" onClick={()=>{
                                 props.onPageChange('create-comment');
                                 props.setParentCommentID(comment._id);
-                            }}>reply</button>
+                            }}>reply
+                            </button>}
+                            <hr/>
                             <StructureComments onPageChange={props.onPageChange} setParentCommentID={props.setParentCommentID} commentsData={commentsData} commentIDs={comment.commentIDs}/>
                         </div>
                     ))

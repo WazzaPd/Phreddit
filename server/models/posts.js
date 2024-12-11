@@ -29,12 +29,6 @@ const postSchema = new mongoose.Schema({
         default: 0,
         required: true
     },
-    upVoteUsers: [{
-        type: String,
-    }],
-    downVoteUsers: [{
-        type: String,
-    }],
     linkFlairID: mongoose.SchemaTypes.ObjectID,
     commentIDs: [{
         type: mongoose.SchemaTypes.ObjectID,
