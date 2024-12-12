@@ -128,7 +128,7 @@ async function initializeDB() {
         name: "Admin",
         email: "Admin@admin.com",
         passwordHash: '$2b$10$Yn1pdLFuXMuU7Qjgu7HP8u1CmBGxdlEwtODUuSjVfOIvIpPVt.ekm',
-        reputation: 10000000,
+        reputation: 1000,
         communities: []
     }
     let adminRef1 = await createUser(admin);
@@ -140,7 +140,7 @@ async function initializeDB() {
             name: 'JohnnyD',
             email: 'john.doe@example.com',
             password: 'password123',
-            reputation: 0,
+            reputation: 100,
             communities: [],
         },
         {
@@ -149,7 +149,7 @@ async function initializeDB() {
             name: 'JaneS',
             email: 'jane.smith@example.com',
             password: 'password123',
-            reputation: 0,
+            reputation: 100,
             communities: [],
         },
         {
@@ -158,7 +158,7 @@ async function initializeDB() {
             name: 'AliceB',
             email: 'alice.brown@example.com',
             password: 'password123',
-            reputation: 0,
+            reputation: 100,
             communities: [],
         },
     ];
