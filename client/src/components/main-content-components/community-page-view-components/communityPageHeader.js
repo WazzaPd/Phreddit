@@ -8,7 +8,10 @@ const CommunityPageHeader = (props) => {
 
   const { user, isLoggedIn } = useAuth();
 
-  console.log(props.community)
+  console.log(user);
+  // console.log(props.community);
+
+  // console.log(props.community.members.includes(user.name))
 
   function timeAgo(pastDate) {
 
@@ -49,8 +52,8 @@ const CommunityPageHeader = (props) => {
   async function handleJoinCommunity(){
     try {
       const response = await axios.post("http://localhost:8000/communitiesData/joinCommunity", {
-        username: user.displayName,
-        userID: user.id,
+        username: user.name,
+        userID: user._id,
         communityID: props.community._id
       });
 
@@ -65,8 +68,8 @@ const CommunityPageHeader = (props) => {
   async function handleLeaveCommunity(){
     try {
       const response = await axios.post("http://localhost:8000/communitiesData/leaveCommunity", {
-        username: user.displayName,
-        userID: user.id,
+        username: user.name,
+        userID: user._id,
         communityID: props.community._id
       });
 
@@ -88,7 +91,7 @@ const CommunityPageHeader = (props) => {
       <p>Start Date: {timeAgo(props.community.startDate)}</p>
       <p>Created By: {props.createdBy}</p>
       { isLoggedIn && 
-        (props.community.members.includes(user.displayName) ? (
+        (props.community.members.includes(user.name) ? (
           <button onClick={handleLeaveCommunity}>Leave Community</button>
         ) : (
           <button onClick={handleJoinCommunity}>Join Community</button>

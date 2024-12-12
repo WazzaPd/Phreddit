@@ -13,6 +13,12 @@
     font-family: "verdana, arial, helvetica, sans-serif";
 }
 
+.exploreMoreSeperator {
+    padding-top: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
 #home-header-container, #community-header-container, #search-results-header-container{
     border-bottom: 1px solid lightgray;
 }

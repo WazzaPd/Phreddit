@@ -1,29 +1,11 @@
 Team: mips_after
 Members: Joseph Wu, Toni liang
 
-CSE 316, Assignment 4
----------------------
- ______   ______   __   __   __       ______   _______     
-/_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
-\:::_ \ \\::::_\/_\:\ \\ \ \\:\ \    \:::_ \ \\::::__\/__  
- \:\ \ \ \\:\/___/\\:\ \\ \ \\:\ \    \:\ \ \ \\:\ /____/\ 
-  \:\ \ \ \\::___\/_\:\_/.:\ \\:\ \____\:\ \ \ \\:\\_  _\/ 
-   \:\/.:| |\:\____/\\ ..::/ / \:\/___/\\:\_\ \ \\:\_\ \ \ 
-    \____/_/ \_____\/ \___/_/   \_____\/ \_____\/ \_____\/ 
-==============================================================
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+********************************************************************************
 
-
-Format:
-FirstName LastName -- Date
---------------------------------------------------------------
-Goal for Session: 
-f;aslkjdfl;sjldfjlksj
-
-End of Session: 
-What was accomplished, what's next?
-==============================================================
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+NOTE: PROFESSOR KANE HAS GIVEN US AN EXTENSION TO THE ASSIGNMENT TO 12/11/2024
+NOTE: PROFESSOR KANE HAS GIVEN US AN EXTENSION TO THE ASSIGNMENT TO 12/11/2024
+NOTE: PROFESSOR KANE HAS GIVEN US AN EXTENSION TO THE ASSIGNMENT TO 12/11/2024
 
 
 Toni Liang -- 11/27/2024
@@ -207,3 +189,13 @@ Finish use cases. Use cases not yet implemented:
     - use case 19 
     - use case 20
 
+Joseph Wu, Toni Liang -- 12/11/2024
+--------------------------------------------------------------
+Goal for Session:
+- Finish Entire Use cases (Project)
+
+End of Session:
+- Finished Entire Use cases (Project)
+
+Next Session:
+- Pray for Grade

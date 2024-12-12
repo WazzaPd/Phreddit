@@ -120,4 +120,84 @@ router.get('/validate-token', async (req, res) => {
     }
 });
 
+router.post('/admin/switch-user', async (req, res) => {
+    const adminToken = req.cookies.token; // Get admin token from cookies
+    const { userId } = req.body; // Target user ID
+
+    try {
+        // Verify the admin token
+        const adminPayload = jwt.verify(adminToken, process.env.JWT_SECRET);
+        console.log(adminPayload);
+        console.log(userId);
+
+        // Store the admin's current session
+        res.cookie('adminToken', adminToken, { httpOnly: true, secure: true, sameSite: 'None' });
+
+        // Get the target user's data
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Generate a JWT for the target user
+        const userToken = jwt.sign(
+            { userId: user._id, name: user.name },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        // Set the new user token
+        res.cookie('token', userToken, { httpOnly: true, secure: true, sameSite: 'None' }).status(200).json({
+            message: 'Switched to user account',
+            user: { id: user._id, email: user.email, displayName: user.name },
+        });
+    } catch (error) {
+        console.error('Error during switch-user:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.post('/admin/revert', async (req, res) => {
+    const adminToken = req.cookies.adminToken; // Get stored admin token
+
+    if (!adminToken) {
+        return res.status(403).json({ message: 'Cannot revert session' });
+    }
+
+    try {
+        // Verify the stored admin token
+        const adminPayload = jwt.verify(adminToken, process.env.JWT_SECRET);
+
+        // Set the admin token back in cookies
+        res.cookie('token', adminToken, { httpOnly: true, secure: true, sameSite: 'None' });
+        res.clearCookie('adminToken'); // Clear the stored admin token
+        res.status(200).json({ message: 'Reverted to admin session' });
+    } catch (error) {
+        console.error('Error during revert:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.get('/admin/validate-session', (req, res) => {
+    const adminToken = req.cookies.adminToken; // Get the adminToken cookie
+
+    console.log("Check Admin called");
+    console.log(adminToken);
+
+    if (!adminToken) {
+        return res.status(401).json({ isAdmin: false, message: 'Admin session not found.' });
+    }
+
+    try {
+        const adminPayload = jwt.verify(adminToken, process.env.JWT_SECRET);
+
+        res.status(200).json({ isAdmin: true, message: 'Admin session is active.' });
+    } catch (error) {
+        console.error('Error validating admin session:', error);
+        res.status(401).json({ isAdmin: false, message: 'Invalid or expired token.' });
+    }
+});
+
+
+
 module.exports = router;

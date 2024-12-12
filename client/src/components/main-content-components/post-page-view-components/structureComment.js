@@ -1,43 +1,56 @@
 import { useAuth } from "../../../context/AuthProvider";
 import axios from 'axios';
-import { react, useState } from 'react';
+import { react, useState, useEffect} from 'react';
 export default function StructureComments(props){
 
     const {commentsData, commentIDs} = props;
     const { isLoggedIn } = useAuth();
 
-    let current_comments = [];
-    for(let i = 0; i<commentIDs.length; i++){
-        current_comments.push(commentsData.find(comment => comment._id === commentIDs[i]));
-    }
+    const [count, setCount] = useState(0);
+    const [current_comments, setCurrentComments] = useState([]);
+
+
+    useEffect(() => {
+        console.log(commentIDs);
+
+        setCurrentComments([]);
+        for(let i = 0; i<commentIDs.length; i++){
+            setCurrentComments(current_comments => [...current_comments, commentsData.find(comment => comment._id === commentIDs[i])]);
+        }
+    }, [commentIDs]);
+
+    const forceRerender = () => {
+        setCount(prevCount => prevCount + 1); // Changing state triggers rerender
+    };
 
     current_comments.sort((a, b) => new Date(b.commentedDate) - new Date(a.commentedDate)); 
 
 
-    const handleVote = async (commentId, voteType) => {
-        // if (!isLoggedIn) {
-        //     alert("You must log in to vote.");
-        //     return;
-        // }
+    const handleVote = async (commentedBy, commentId, voteType) => {
+        if (!isLoggedIn) {
+            alert("You must log in to vote.");
+            return;
+        }
 
-        // try {
-        //     const response = await axios.post("http://localhost:8000/commentsData/toggle-vote", {
-        //         commentId,
-        //         voteType,
-        //     });
+        try {
+            const response = await axios.post("http://localhost:8000/commentsData/toggle-vote", {
+                commentId: commentId,
+                voteType: voteType,
+                commentedBy: commentedBy
+            });
 
-        //     // Update the votes for the specific comment
-        //     const updatedComment = commentsData.find((comment) => comment._id === commentId);
-        //     if (updatedComment) {
-        //         updatedComment.votes = response.data.votes;
-        //     }
+            // Update the votes for the specific comment
+            const updatedComment = commentsData.find((comment) => comment._id === commentId);
+            if (updatedComment) {
+                updatedComment.votes = response.data.votes;
+            }
 
-        //     // Trigger a re-render
-        //     props.onPageChange(props.currentPage);
-        // } catch (error) {
-        //     console.error("Error toggling vote:", error.response?.data || error.message);
-        //     alert("Failed to update vote. Please try again.");
-        // }
+            // Trigger a re-render
+            forceRerender();
+        } catch (error) {
+            console.error("Error toggling vote:", error.response?.data || error.message);
+            alert("Failed to update vote. Please try again.");
+        }
     };
     
     
@@ -45,15 +58,15 @@ export default function StructureComments(props){
         <div id="comments-container">
             {commentIDs.length === 0 ? ('') : (               //Base Case
                 <div className="indent-comment-block">
-                    {
+                    { (current_comments != undefined) &&
                     current_comments.map((comment, index)=>(
                         <div id="individual-comment" key={comment._id}>
                             <div id="comment-username-time">
                                 <p>
                                     {comment.commentedBy} | {timeAgo(comment.commentedDate)} | 
-                                    {isLoggedIn && <button className="upvote-button" onClick={() => handleVote("upvote")}>Upvote ↑</button>}
-                                    <p style = {{display: "inline", fontWeight: "bold"}}> votes: {"#"}</p>
-                                    {isLoggedIn && <button className="downvote-button" onClick={() => handleVote("downvote")}>Downvote ↓</button>}
+                                    {isLoggedIn && <button className="upvote-button" onClick={() => handleVote(comment.commentedBy, comment._id, "upvote")}>Upvote ↑</button>}
+                                    <p style = {{display: "inline", fontWeight: "bold"}}> votes: {comment.votes}</p>
+                                    {isLoggedIn && <button className="downvote-button" onClick={() => handleVote(comment.commentedBy, comment._id, "downvote")}>Downvote ↓</button>}
                                 </p>
                             </div>
                             <div id="comment-content">

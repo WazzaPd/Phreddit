@@ -1,10 +1,20 @@
 import { useEffect, useState, useCallback } from 'react';
 import PostContainer from './post-components/postContainer.js';
+import { useAuth } from "../../../context/AuthProvider";
+import axios from "axios";
 
 const SearchResultsPosts = (props) => {
+  const { isLoggedIn, user } = useAuth();
   const { postData , setPost, onPageChange, sort, setLoading, loading, communitiesData, linkFlairsData, commentsData, postsData } = props;
 
   const [sortedPostData, setSortedPostData] = useState([]);
+  const [prioritizedPostsData, setPrioritizedPostsData] = useState([]);
+
+  const [count, setCount] = useState(0);
+
+  const forceRerender = () => {
+      setCount(prevCount => prevCount + 1); // Changing state triggers rerender
+  };
 
   const getFreshestComment = useCallback(async (commentID) => {
     let current_comment = commentsData.find(comment => comment._id === commentID);
@@ -57,17 +67,75 @@ const SearchResultsPosts = (props) => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const sortedData = await sortPostData(sort, postData);
-        setSortedPostData(sortedData);
+        if( isLoggedIn ){
+
+          console.log("This is search page");
+          // gets an array of community IDs
+          const userCommunitiesRes = await axios.get('http://localhost:8000/usersData/getUserCommunities');
+          // console.log('homepageview recieved user communities');
+          // .log(userCommunitiesRes.data);
+
+          //iteragte through array and create a mega array of communitie's post if they are in the array else create other mega array
+          //use sort posts on post, show the communitie's post first
+          const userCommunitiesIDs = userCommunitiesRes.data;
+
+          const searchPrioritizedPostsIDs = [];
+
+          // gets an of post ids that the user prioritizes
+          userCommunitiesIDs.forEach(id => {
+            const matchingCommunity = communitiesData.find(community => community._id === id);
+            if (matchingCommunity){
+              searchPrioritizedPostsIDs.push(...matchingCommunity.postIDs);
+            }
+          })
+
+          // console.log("This is prioritized posts ids");
+          // console.log(searchPrioritizedPostsIDs);
+
+          // Match post IDs to actual posts
+          const topPosts = [];
+          postData.forEach(post => {
+            const matchingPost = searchPrioritizedPostsIDs.find(id => post._id === id);
+            if (matchingPost){
+              topPosts.push(post);
+            }
+          })
+
+          // console.log("This is prioritized posts");
+          // console.log(topPosts);
+
+          
+          // Match post IDs to actual posts
+          const searchUnprioritizedPosts = [];
+          postData.forEach(post => {
+            if (!searchPrioritizedPostsIDs.includes(post._id)){
+              searchUnprioritizedPosts.push(post);
+            }
+          })
+
+          // console.log("This is unprioritized posts");
+          // console.log(searchUnprioritizedPosts);
+
+          const sortedSearchPrioritizedPosts = await sortPostData(sort, topPosts);
+          const sortedSearchUnprioritizedPosts = await sortPostData(sort, searchUnprioritizedPosts);
+
+          await setPrioritizedPostsData(sortedSearchPrioritizedPosts);
+          await setSortedPostData(sortedSearchUnprioritizedPosts);
+        } else {
+        
+          const sortedData = await sortPostData(sort, postData);
+          await setSortedPostData(sortedData);
+        }
       } catch (error) {
         console.error("Error fetching sorted data:", error);
       } finally {
         setLoading(false);
+        forceRerender();
       }
     }
 
     fetchData();
-  }, [postData, setLoading, sort, sortPostData]);
+  }, [postData, loading, sort, sortPostData]);
 
   if (postData.length === 0) {
     return (
@@ -84,6 +152,30 @@ const SearchResultsPosts = (props) => {
   }
   return (
     <div id="search-results-posts">
+      { isLoggedIn && 
+        (prioritizedPostsData.map((post, index) => (
+          <PostContainer
+            key={index}
+            post={post}
+            communities={communitiesData}
+            linkFlairs={linkFlairsData}
+            setPost={setPost}
+            onPageChange={onPageChange}
+            //data={data}
+            // communitiesData={communitiesData}
+            // linkFlairsData={linkFlairsData}
+            commentsData={commentsData}
+            postsData={postsData}
+          />
+        ))) && (
+          <div>
+          <div className='exploreMoreSeperator'> ___________________ Explore Different Communities' Posts Below ___________________</div>
+            <div className="dotted-line">
+                <p></p>
+            </div>
+          </div>
+        )
+      }
       {sortedPostData.map((post, index) => (
         <PostContainer
           key={index}

@@ -48,6 +48,7 @@ export default function PostPageHeader(props){
             const response = await axios.post("http://localhost:8000/postsData/toggle-vote", {
                 postId: post._id,
                 voteType,
+                postedBy: post.postedBy
             });
 
             setVoteCount(response.data.votes);

@@ -29,6 +29,7 @@ const SearchResultsView = (props) => {
         setPostsData(postsRes.data);
         setCommentsData(commentsRes.data);
         setLinkflairsData(linkflairsRes.data);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -104,7 +105,6 @@ const SearchResultsView = (props) => {
         }
       }
     }
-
     return fetchPostData(postsIDsBySearchTerm);
   }, [postsData, commentsData]);
 
@@ -115,7 +115,7 @@ const SearchResultsView = (props) => {
     }
   }, [searchTerms, loading, searchPostsAndComments]);
 
-  console.log("Did it reach the return statement in search results view?");
+  // console.log("Did it reach the return statement in search results view?");
   return (
     <div id="search-results-view">
       <SearchResultsHeader

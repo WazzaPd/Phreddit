@@ -10,6 +10,10 @@ import CommunityPageView from "./main-content-components/communityPageView";
 import SearchResultsView from './main-content-components/searchResultsView';
 import NewCommentView from './main-content-components/newCommentView';
 import CreateCommunityView from './main-content-components/createCommunityView';
+import ProfilePageView from './main-content-components/profilePageView';
+import EditCommunityPage from './main-content-components/profile-page-components/editCommunityPage';
+import EditPostPage from './main-content-components/profile-page-components/editPostPage';
+import EditCommentPage from './main-content-components/profile-page-components/editCommentPage';
 import axios from 'axios';
 
 export default function MainContent (props){
@@ -28,6 +32,11 @@ export default function MainContent (props){
 
     // Trigger to control when data is refreshed
     const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+    //Edit Pages
+    const [communityID, setCommunityID] = useState(null);
+    const [postID, setPostID] = useState(null);
+    const [commentID, setCommentID] = useState(null);
 
     // Fetch data from server
     useEffect(() => {
@@ -101,6 +110,30 @@ export default function MainContent (props){
             exactSearchTerms={exactSearchTerms}
             />
         console.log("search results page");
+    }else if (page === 'profile'){
+        content = <ProfilePageView 
+            onPageChange={props.onPageChange}
+            setPost={setPost} 
+            setCommunityID={setCommunityID}
+            setPostID={setPostID}
+            setCommentID={setCommentID}
+            />
+    }else if (page === 'edit-comment-page'){
+        content = <EditCommentPage 
+            onPageChange={props.onPageChange}
+            commentID={commentID}
+            />
+    }else if (page === 'edit-post-page'){
+        content = <EditPostPage 
+            onPageChange={props.onPageChange}
+            postID={postID}
+            />
+    }else if (page === 'edit-community-page'){
+        content = <EditCommunityPage 
+            onPageChange={props.onPageChange}
+            communityID={communityID}
+            refreshCommunitiesNav={props.refreshCommunitiesNav}
+            />
     }
 
 

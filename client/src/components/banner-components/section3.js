@@ -42,7 +42,7 @@ const Section3 = (props) => {
 
             <img alt="img" src={bellNotification} />
             {isLoggedIn ? (
-                <button onClick={() => onPageChange("profile")}>User: {user.displayName}</button>
+                <button onClick={() => onPageChange("profile")}>User: {user.name}</button>
             ) : (
                 <button>User: Guest</button>
             ) }
