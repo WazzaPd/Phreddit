@@ -4,14 +4,216 @@
 Add design docs in *images/*
 
 ## Instructions to setup and run project
-Clearly explain the steps required to install and configure necessary packages,
-for both the server and the client, and the sequence of steps required to get
-your application running.
+- In both client and server files run ```npm install```.
+
+- In client run ```npm start```
+- In server first run ```node init.js 'mongodb://127.0.0.1:27017/phreddit'```
+    - The command line will propmt you to create an admin user afterwards
+- In server then run ```nodemon server.js```
+
+- The Website will be located at ```localhost:3000```
 
 
 In the sections below, list and describe each contribution briefly.
 
-## Team Member 1 Contribution
+Team: mips_after
+Members: Joseph Wu, Toni liang
 
-## Team Member 2 Contribution
+********************************************************************************
 
+- NOTE: PROFESSOR KANE HAS GIVEN US AN EXTENSION TO THE ASSIGNMENT TO 12/11/2024
+- NOTE: PROFESSOR KANE HAS GIVEN US AN EXTENSION TO THE ASSIGNMENT TO 12/11/2024
+- NOTE: PROFESSOR KANE HAS GIVEN US AN EXTENSION TO THE ASSIGNMENT TO 12/11/2024
+
+
+Toni Liang -- 11/27/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement welcome page 
+
+End of Session:
+- finished implementing welcome page
+
+
+Next session:
+- create the login page
+- create the register user page
+- use authorization, authentication, and JWT 
+
+Toni Liang -- 11/28/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement login and register page
+- Use authorization, authentication, and JWT
+
+End of Session:
+- finished implementing login and register page
+
+Next session:
+- Create Scheamas 
+- Use authorization, authentication, and JWT
+- Verify user inputs
+
+Toni Liang, Joseph Wu -- 12/06/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement JWT and authentication in server
+- Create Schemas
+- Create context react component for global access to login state
+
+End of Session:
+- finished implementing JWT and authentication in server
+- finished creating schemas
+- finished react component AuthProvider
+
+Next session:
+- Create Schemas
+- Create context react component for global access to login state
+
+Toni Liang -- 12/07/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement JWT and authentication in server
+- Finish Register and Login pages
+- Add in validation and error handling
+-allow user to log in
+
+End of Session:
+- finished implementing JWT and authentication in server
+- finished implementing Register and Login pages
+- finished adding in validation and error handling
+- finished allowing user to log in
+
+Next session:
+- Implement Use case 4 Log out user
+- take user to welcome page after log out
+
+
+Toni Liang -- 12/08/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement Use case 3 Log out user
+    - take user to welcome page after log out
+- Implement Use case 4 Banner User Guest
+    - Take user back to welcome page after clicking on Phreddit
+
+End of Session:
+- Implemented Use case 3 Log out user
+- Implemented Use case 4 Banner User Guest Partially
+
+Next session:
+- Finish missing features of Use case 4 
+- Implement Use case 5 
+- Implement Use case 6
+
+
+Joseph Wu -- 12/09/2024
+--------------------------------------------------------------
+Goal for Session:
+- Implement use case 4 and 5
+
+End of Session:
+- implemented Use case 4, banner for Guest user
+- Partial implementation of use Case 5, banner for logged in user
+
+Next Session:
+- Finish implementation of Use case 5
+
+End of Session:
+- implemented Use case 4, banner for Guest user
+- Partial implementation of use Case 5, banner for logged in user
+
+Next Session:
+- Finish implementation of Use case 5
+
+
+Toni Liang, Joseph Wu -- 12/10/2024
+--------------------------------------------------------------
+Goal for Session:
+Toni:
+- Finish use case 6
+    - Distinguish between logged in and guest user
+- Finish use case 7
+    - Sort navbar communities section based on membership
+- Finish use case 8
+    - implement upvote and do not let guest user upvote
+
+Joseph:
+- Finish implementation for case 5 (Banner for logged in user)
+- Start implementation for case 18 (User Profile Page View)
+
+end of session:
+- finished use case 6
+- finished use case 7
+- finished use case 8
+
+Next session:
+- Finish use case 9
+- Finish use case 10
+- Finish use case 11
+- Finish use case 12
+
+Toni Liang-- 12/10/2024
+--------------------------------------------------------------
+Goal for Session:
+- Fix Errors in Upvote and Downvote
+- Fix Errors in Create Post
+- Fix Errors in Search Results
+
+End of Session:
+- Fixed errors in upvote and downvote
+- Fixed errors in create post
+- Fixed errors in search results
+Next Session:
+- Hopefully work until there is < 5 use cases left
+
+Joseph Wu -- 12/10/2024
+--------------------------------------------------------------
+Goal for Session:
+- Finish use case 10 (communities)
+
+End of Session:
+- Completed case 10
+
+Next Session:
+- Work on use case 9 (logged in posts page)
+
+Toni Liang -- 12/10/2024
+--------------------------------------------------------------
+Goal for Session:
+- Differentiate implementation of upvote and downvote in use case 9
+- Try to implement more use cases. Use cases not yet implemented:
+    - use case 9 (sorting)
+    - use case 12 (sorting)
+    - use case 13 
+    - use case 14 
+    - use case 15 
+    - use case 16 
+    - use case 17 
+    - use case 18 
+    - use case 19 
+    - use case 20 
+
+End of Session:
+Finished use cases 11, 13, 15, 16, 17
+Note: for use case 13, upvote, and downvote need to be implemented
+
+Next Session:
+Finish use cases. Use cases not yet implemented:
+    - use case 9 (sorting)
+    - use case 12 (sorting)
+    - use case 14 (post & comment upvote and downvote)
+    - use case 18 
+    - use case 19 
+    - use case 20
+
+Joseph Wu, Toni Liang -- 12/11/2024
+--------------------------------------------------------------
+Goal for Session:
+- Finish Entire Use cases (Project)
+
+End of Session:
+- Finished Entire Use cases (Project)
+
+Next Session:
+- Pray for Grade

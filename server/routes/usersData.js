@@ -1,5 +1,6 @@
 const express = require('express');
 const comments = require('../models/comments.js');
+const communities = require('../models/communities.js');
 const posts = require('../models/posts.js');
 const users = require('../models/user.js');
 const auth = require('../middleware/auth');
