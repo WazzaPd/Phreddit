@@ -44,7 +44,6 @@ const ProfilePageView = (props) => {
             const response = await axios.get("http://localhost:8000/usersData/getAllUsers");
             const userListing = response.data;
 
-
             setListings(userListing);
         } catch (error) {
             console.error("Failed to fetch user listings:", error.response?.data || error.message);
@@ -209,6 +208,7 @@ const ProfilePageView = (props) => {
     const renderListings = () => {
         if (activeTab === "users") {
             return listings.map((user) => (
+                user.hasOwnProperty("email") && (
                 <div key={user._id} className="listing-item">
                     <a href={``}>
                         UserName: {user.name}
@@ -231,7 +231,7 @@ const ProfilePageView = (props) => {
                     <br/>
                     <br/>
                 </div>
-            ));
+            )));
         } else if (activeTab === "communities") {
             return listings.map((community) => (
                 <div key={community._id} className="listing-item">
@@ -280,6 +280,8 @@ const ProfilePageView = (props) => {
         }
         return <p>Select a tab to view listings.</p>;
     };
+
+    console.log(user.email);
 
     return (
         <div id="profile-page-view">
