@@ -69,7 +69,7 @@ const SearchResultsPosts = (props) => {
       try {
         if( isLoggedIn ){
 
-          console.log("This is search page");
+          // console.log("This is search page");
           // gets an array of community IDs
           const userCommunitiesRes = await axios.get('http://localhost:8000/usersData/getUserCommunities');
           // console.log('homepageview recieved user communities');
@@ -150,10 +150,11 @@ const SearchResultsPosts = (props) => {
   } else if (loading === true) {
     return <div></div>;
   }
+  console.log(prioritizedPostsData);
+  console.log(sortedPostData);
   return (
     <div id="search-results-posts">
-      { isLoggedIn && 
-        (prioritizedPostsData.map((post, index) => (
+      { prioritizedPostsData.map((post, index) => (
           <PostContainer
             key={index}
             post={post}
@@ -167,15 +168,14 @@ const SearchResultsPosts = (props) => {
             commentsData={commentsData}
             postsData={postsData}
           />
-        ))) && (
-          <div>
-          <div className='exploreMoreSeperator'> ___________________ Explore Different Communities' Posts Below ___________________</div>
-            <div className="dotted-line">
-                <p></p>
-            </div>
-          </div>
-        )
+        ))
       }
+      <div>
+        <div className='exploreMoreSeperator'> ___________________ Explore Different Communities' Posts Below ___________________</div>
+          <div className="dotted-line">
+            <p></p>
+          </div>
+        </div>
       {sortedPostData.map((post, index) => (
         <PostContainer
           key={index}
