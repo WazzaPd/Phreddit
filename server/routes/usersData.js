@@ -91,7 +91,7 @@ usersRouter.delete('/delete/:userId', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        if (user.email === 'Admin@admin.com') {
+        if (user.email.includes('@admin.com')) {
             return res.status(403).json({ message: 'Cannot delete admin user' });
         }
 
