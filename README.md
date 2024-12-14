@@ -210,10 +210,23 @@ Finish use cases. Use cases not yet implemented:
 Joseph Wu, Toni Liang -- 12/11/2024
 --------------------------------------------------------------
 Goal for Session:
-- Finish Entire Use cases (Project)
+- Finish Entire Use cases 
 
 End of Session:
-- Finished Entire Use cases (Project)
+- Finished Entire Use cases 
+
+Next Session:
+- Pray for Grade
+
+Toni Liang -- 12/13/2024
+--------------------------------------------------------------
+Goal for Session:
+- Finish UML Diagram and Project
+- Test Bugs, and style
+
+End of Session:
+- Finished UML Diagram and Project
+- Tested Bugs, and style
 
 Next Session:
 - Pray for Grade

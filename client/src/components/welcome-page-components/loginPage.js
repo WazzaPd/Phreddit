@@ -26,6 +26,8 @@ const LoginPage = (props) => {
             if (err.response && err.response.data && err.response.data.message) {
                 setError(err.response.data.message); // Display specific backend error
             } else {
+                console.log(err);
+                console.log(err.response);
                 setError("Login failed. Please try again.");
             }
         }

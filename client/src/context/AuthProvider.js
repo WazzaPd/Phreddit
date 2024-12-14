@@ -30,13 +30,14 @@ export const AuthProvider = ({children}) => {
 
     const login = async (email, password) => {
         try {
+            console.log("email and password:", email, password);
             const response = await axios.post("auth/login", {email, password});
             setUser(response.data.user);
             setIsLoggedIn(true);
         } catch (error) {
             console.error("Login failed: ", error.message);
             setIsLoggedIn(false);
-            throw error("throw error to prevent switching to welcome page in loginPage"); 
+            throw error; 
         }
     };
 

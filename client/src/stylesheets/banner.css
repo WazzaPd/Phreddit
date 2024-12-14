@@ -140,3 +140,15 @@ header { /* These are just the default CSS properties for h1 header tags */
     }
 }
 
+.revert-to-admin{
+    margin-left: 45px;
+    border-width: 1px;
+    padding: 10px;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.revert-to-admin:hover{
+    cursor: pointer;
+    background-color: rgb(255, 68, 51);
+}

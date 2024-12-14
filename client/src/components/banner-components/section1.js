@@ -67,7 +67,7 @@ const Section1 = (props) => {
                     onPageChange('home'); 
                 }}}>Phreddit</p>
             {admin && (
-                <button onClick={handleRevertToAdmin}>Revert to Admin</button>
+                <button onClick={handleRevertToAdmin} className="revert-to-admin">Revert to Admin</button>
             )}
         </div>
     );
