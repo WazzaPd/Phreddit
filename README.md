@@ -1,4 +1,5 @@
 # Phreddit
+https://phreddit-deployment-frontend.onrender.com/
 ## 🚀 Overview
 This project is a full-stack web application that replicates the core functionalities of the popular platform Reddit. Users can create posts, comment, upvote/downvote content, and explore topics organized into categories. Built using the **MERN** stack (MongoDB, Express.js, React, and Node.js), this clone demonstrates scalable architecture and modern web development practices.
 
